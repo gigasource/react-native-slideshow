@@ -5,14 +5,12 @@
 
 import 'react-native';
 import React from 'react';
-import SlideShow2 from './src/SlideShow2';
-import moment from 'moment'
 import {
+  SlideShow,
   convertToReactAnimation,
-  getDeviceDimensions,
   SUPPORTED_IMAGE,
   SUPPORTED_VIDEO
-} from './src/constants/constants';
+} from './src/index';
 import _ from 'lodash';
 
 let timeCount = 0;
@@ -39,11 +37,11 @@ export default class TestApp extends React.Component {
     this.state = {
       currentPlayList: normalize([
         { media: { name: 'src3', src: require('./assets/img3.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 2900 },
-        { media: { name: 'src6', src: require('./assets/img3.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 2900 },
-        { media: { name: 'src7', src: require('./assets/img4.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 2900 },
+        { media: { name: 'src6', src: require('./assets/img3.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 5000 },
+        { media: { name: 'src7', src: require('./assets/img4.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 5000 },
         { media: { name: 'src1', src: require(`./assets/video1.mp4`), ext: '.mp4' }, effect: 'slideInLeft' },
         { media: { name: 'src1', src: require(`./assets/video1.mp4`), ext: '.mp4' }, effect: 'slideInLeft'},
-        { media: { name: 'src4', src: require('./assets/img4.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 2900 },
+        { media: { name: 'src4', src: require('./assets/img1.jpeg'), ext: '.jpg' }, effect: 'slideInLeft', duration: 5000 },
         { media: { name: 'src2', src: require('./assets/small.mp4'), ext: '.mp4' }, effect: 'slideInLeft' },
         { media: { name: 'src5', src: require('./assets/viking.mp4'), ext: '.mp4' }, effect: 'slideInLeft', duration: 0 }
         ]),
@@ -101,6 +99,6 @@ export default class TestApp extends React.Component {
     let currentContent = currentPlayList[currentContentIndex];
     let nextContent = currentPlayList[(currentContentIndex + 1) % currentPlayList.length];
     return (
-      <SlideShow2 key={2} ref={this.slideShowRef} currentContent={currentContent} nextContent={nextContent} setNextContentCallback={this.setNextContentCallback.bind(this)} getDeviceDimensions={getDeviceDimensions}/>);
+      <SlideShow key={2} ref={this.slideShowRef} currentContent={currentContent} nextContent={nextContent} setNextContentCallback={this.setNextContentCallback.bind(this)}/>);
   }
 }

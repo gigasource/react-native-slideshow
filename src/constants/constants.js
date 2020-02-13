@@ -30,11 +30,4 @@ export function convertToReactAnimation(animation) {
 export const SUPPORTED_VIDEO = ['.mp4', '.mkv', '.mov', 'webm'];
 export const SUPPORTED_IMAGE = ['.jpg', '.jpeg', '.png', '.bmp'];
 
-export function getDeviceDimensions() {
-  return {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height
-  };
-}
-
 // export const deviceToken = DeviceInfo.getUniqueID();

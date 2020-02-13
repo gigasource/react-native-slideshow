@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-class Slide2 extends React.Component {
+class Slide extends React.Component {
   mediaTimeout = null;
 
   constructor(props) {
@@ -34,7 +34,7 @@ class Slide2 extends React.Component {
       <Animatable.Image
         key={`image` + this.props.key2}
         useNativeDriver={true}
-        // animation={this.props.animation}
+        animation={opacity > 0 ? this.props.animation : null}
         duration={300}
         onError={
           () => console.log('error loading image')
@@ -42,7 +42,7 @@ class Slide2 extends React.Component {
         easing="linear"
         source={source}
         style={{
-          ...{opacity: opacity},
+          opacity: 0,
           ...StyleSheet.absoluteFillObject,
           ...this.props.getDeviceDimensions(),
           zIndex: 2
@@ -65,6 +65,6 @@ class Slide2 extends React.Component {
   }
 }
 
-Slide2.propTypes = {};
+Slide.propTypes = {};
 
-export default Slide2;
+export default Slide;

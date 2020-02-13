@@ -1,11 +1,18 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import Slide2 from './Slide2';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import Slide from './Slide';
 import Video from 'react-native-video';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import _ from 'lodash';
 
-class SlideShow2 extends React.Component {
+function getDeviceDimensions() {
+  return {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height
+  };
+}
+
+class SlideShow extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
@@ -20,7 +27,6 @@ class SlideShow2 extends React.Component {
       source: null,
     };
     this.isPlaying = false;
-    this.repeat = false;
     this.preRender(props);
   }
   onBeforeFinish(_time) {
@@ -62,22 +68,17 @@ class SlideShow2 extends React.Component {
       }
       this.slide[Number(this.nodeFlag)].step = 'next';
     }
-    if (nextContent.media.type === 'image') {
-      this.slide[Number(!this.nodeFlag)] = {
-        content: nextContent,
-        step: 'next',
-        cb: null
-      };
-    } else if (nextContent.media.type === 'video' && currentContent.media.type !== 'video') {
+    this.slide[Number(!this.nodeFlag)].content = null;
+    if (nextContent.media.type === 'video' && currentContent.media.type !== 'video') {
       this.videoSlide = {
         opacity: 0,
         source: nextContent.media.source
       };
     }
     this.videoSlide.source = resolveAssetSource(this.videoSlide.source);
-    if (this.repeat) this.videoSlide.source.mainVer = this.count++;
-    if (currentContent.media.type === 'video') {
-      this.repeat = _.isEqual(currentContent.media.source, nextContent.media.source);
+
+    if (currentContent.media.type === 'video' && this.videoSlide.source) {
+      this.videoSlide.source.mainVer = this.count++;
     }
   }
   UNSAFE_componentWillReceiveProps(props) {
@@ -87,23 +88,23 @@ class SlideShow2 extends React.Component {
     });
   }
   render() {
-    const { currentContent, getDeviceDimensions, setNextContentCallback } = this.props;
+    const { currentContent, setNextContentCallback } = this.props;
     return (
       <View style={{ justifyContent: 'center', flex: 1 }}>
-        <Slide2 key={'slide0'}
-                key2={'slide0'}
-                content={this.slide[0].content}
-                animation={this.slide[0].animation}
-                step={this.slide[0].step}
-                onFinish={this.slide[0].cb}
-                getDeviceDimensions={getDeviceDimensions}/>
-        <Slide2 key={'slide1'}
-                key2={'slide1'}
-                content={this.slide[1].content}
-                animation={this.slide[1].animation}
-                step={this.slide[1].step}
-                onFinish={this.slide[1].cb}
-                getDeviceDimensions={getDeviceDimensions}/>
+        <Slide key={'slide0'}
+               key2={'slide0'}
+               content={this.slide[0].content}
+               animation={this.slide[0].animation}
+               step={this.slide[0].step}
+               onFinish={this.slide[0].cb}
+               getDeviceDimensions={getDeviceDimensions}/>
+        <Slide key={'slide1'}
+               key2={'slide1'}
+               content={this.slide[1].content}
+               animation={this.slide[1].animation}
+               step={this.slide[1].step}
+               onFinish={this.slide[1].cb}
+               getDeviceDimensions={getDeviceDimensions}/>
         <Video
           key={`video0`}
           resizeMode={'contain'}
@@ -131,6 +132,6 @@ class SlideShow2 extends React.Component {
     );
   }
 }
-export default SlideShow2;
+export default SlideShow;
 
 
