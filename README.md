@@ -51,11 +51,11 @@ Content in playlist must be normalized before putting in Slideshow with this for
 ```json
 { "media": 
   { "source": 
-    { "uri": /* uri to the file */ }, 
-    "type": /* video or image */ 
+    { "uri": "uri to the file"}, 
+    "type": "video or image" 
   }, 
-  "duration": /* duration in milliseconds */, 
-  "effect": /* supported effect */ 
+  "duration": "duration in milliseconds", 
+  "effect": "supported effect" 
 }
 ```
 *convertToReactAnimation, SUPPORTED_IMAGE, SUPPORTED_VIDEO* from this library can be used to normalize the data as the example above.
