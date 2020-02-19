@@ -42,7 +42,7 @@ class Slide extends React.Component {
         easing="linear"
         source={source}
         style={{
-          opacity: 0,
+          opacity,
           ...StyleSheet.absoluteFillObject,
           ...this.props.getDeviceDimensions(),
           zIndex: 2
