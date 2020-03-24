@@ -1,5 +1,3 @@
-import { Dimensions } from 'react-native';
-
 const startAnimationAdapter = {
   'fadeIn': 'fadeIn',
   'slideInUp': 'fadeInUpBig',

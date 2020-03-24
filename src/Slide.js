@@ -33,14 +33,13 @@ class Slide extends React.Component {
     return (
       <Animatable.Image
         key={`image` + this.props.key2}
-        useNativeDriver={true}
         animation={opacity > 0 ? this.props.animation : null}
         duration={300}
         onError={
           () => console.log('error loading image')
         }
         easing="linear"
-        source={source}
+        source={source || ''}
         style={{
           opacity: opacity,
           ...StyleSheet.absoluteFillObject,
@@ -53,7 +52,7 @@ class Slide extends React.Component {
   }
 
   render() {
-    const {content, step} = this.props;
+    const {step} = this.props;
     if (step === 'next') {
       return this._render.bind(this)(0);
     }

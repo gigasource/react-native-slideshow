@@ -1,9 +1,8 @@
 import React from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import Slide from './Slide';
-import Video from 'react-native-video';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
-import _ from 'lodash';
+import ReactPlayer from 'react-player';
+import * as Animatable from 'react-native-animatable';
 
 function getDeviceDimensions() {
   return {
@@ -19,7 +18,6 @@ class SlideShow extends React.Component {
     this.state = {
       isLoading: true
     };
-    this.count = 1;
     this.nodeFlag = true;
     this.slide = [{ step: 'next' }, { step: 'next' }];
     this.videoSlide = {
@@ -28,11 +26,12 @@ class SlideShow extends React.Component {
     };
     this.isPlaying = false;
     this.preRender(props);
+    this.videoRef = React.createRef();
   }
-  onBeforeFinish(_time) {
+  onBeforeFinish({ playedSeconds }) {
     let { currentContent, setNextContentCallback } = this.props;
-    if (currentContent.media.type === 'video' && currentContent.duration && currentContent.duration != 0 && this.isPlaying) {
-      if (_time.currentTime * 1000 >= currentContent.duration) {
+    if (currentContent.media.type === 'video' && currentContent.duration && currentContent.duration !== 0 && this.isPlaying) {
+      if (playedSeconds * 1000 >= currentContent.duration) {
         setNextContentCallback();
         this.isPlaying = false;
       }
@@ -61,10 +60,12 @@ class SlideShow extends React.Component {
       }
     } else {
       if (currentContent.media.type === 'video') {
+        const lastSrc = this.videoSlide.source;
         this.videoSlide = {
           opacity: 100,
           source: currentContent.media.source
         };
+        if (lastSrc === this.videoSlide.source) this.videoRef.current.seekTo(0, 'seconds');
       }
       this.slide[Number(this.nodeFlag)].step = 'next';
     }
@@ -74,11 +75,6 @@ class SlideShow extends React.Component {
         opacity: 0,
         source: nextContent.media.source
       };
-    }
-    this.videoSlide.source = resolveAssetSource(this.videoSlide.source);
-
-    if (currentContent.media.type === 'video' && this.videoSlide.source) {
-      this.videoSlide.source.mainVer = this.count++;
     }
   }
   UNSAFE_componentWillReceiveProps(props) {
@@ -105,29 +101,38 @@ class SlideShow extends React.Component {
                step={this.slide[1].step}
                onFinish={this.slide[1].cb}
                getDeviceDimensions={getDeviceDimensions}/>
-        <Video
+        <Animatable.View
           key={`video0`}
-          resizeMode={'contain'}
-          useNativeDriver={true}
-          useTextureView={false}
-          //animation={this.props.animation}
-          onLoad={() => {
-            this.setOnLoad.bind(this)();
-          }}
-          duration={300}
           style={{
             ...{ opacity: this.videoSlide.opacity },
             ...StyleSheet.absoluteFillObject,
             ...getDeviceDimensions(),
             zIndex: 2
           }}
-          source={this.videoSlide.source}
-          onProgress={this.onBeforeFinish.bind(this)}
-          onEnd={setNextContentCallback}
-          // onError={setNextContentCallback}
-          repeat={false}
-          paused={currentContent.media.type === 'video' ? false : !this.state.isLoading}
-        />
+          // animation={this.props.animation}
+          duration={300}>
+          <ReactPlayer
+            ref={this.videoRef}
+            volume={0}
+            muted={true}
+            onReady={() => {
+              this.setOnLoad.bind(this)();
+            }}
+            style={{
+              'left': '50%',
+              'minHeight': '100%',
+              'minWidth': '100%',
+              'position': 'absolute',
+              'top': '50%',
+              'transform': 'translate(-50%, -50%)'
+            }}
+            url={this.videoSlide.source}
+            onProgress={this.onBeforeFinish.bind(this)}
+            onEnded={setNextContentCallback}
+            playing={currentContent.media.type === 'video' ? true : this.state.isPlaying}
+            loop={false}
+          />
+        </Animatable.View>
       </View>
     );
   }

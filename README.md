@@ -13,7 +13,7 @@ import {
   convertToReactAnimation,
   SUPPORTED_IMAGE,
   SUPPORTED_VIDEO
-} from './src/index';
+} from './SlideComponent';
 // normalize function for contents in playlist
 function normalize(playlist) {
   return playlist.map(play => {
