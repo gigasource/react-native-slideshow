@@ -19,7 +19,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       });
-      console.log(defaultConfig.module.rules[4]);
       return defaultConfig;
     },
   ),

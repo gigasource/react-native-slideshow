@@ -37,10 +37,10 @@ export default class TestApp extends React.Component {
     this.state = {
       currentPlayList: normalize([
         { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'fadeIn', duration: 2900 },
-        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'fadeInUpBig', duration: 2900 },
-        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'fadeInDownBig', duration: 2900 },
-        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'fadeInLeftBig', duration: 2900 },
-        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'fadeInRightBig', duration: 2900 },
+        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'slideInUp', duration: 2900 },
+        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'slideInDown', duration: 2900 },
+        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'slideInLeft', duration: 2900 },
+        // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'slideInRight', duration: 2900 },
         // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'bounceIn', duration: 2900 },
         // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'bounceInUp', duration: 2900 },
         // { media: { name: 'src3', src: 'https://cdn.cnn.com/cnnnext/dam/assets/200311211631-donald-trump-oval-office-march-11-2020-04-super-tease.jpg', ext: '.jpg' }, effect: 'bounceInDown', duration: 2900 },

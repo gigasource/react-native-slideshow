@@ -1,5 +1,5 @@
 {
-  "name": "react-native-slideshow",
+  "name": "react-native-web-slideshow",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,7 @@
     "metro-react-native-babel-preset": "^0.56.4",
     "react-app-rewired": "^2.1.5",
     "react-scripts": "^3.4.1",
-    "react-test-renderer": "16.9.0",
-    "webpack-chain": "^6.4.0"
+    "react-test-renderer": "16.9.0"
   },
   "peerDependencies": {
     "lodash": "^4.17.15",
